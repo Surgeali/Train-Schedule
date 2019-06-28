@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule</title>
+    <!-- Added Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+    <link rel="stylesheet" href="Train.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1>Anytime is Train Time</h1>
+                <h2>Choo Choo. Chee Chee.</h2>
+    </header>
+<script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-app.js">
+</script>
+<script src="https://firebase.google.com/docs/web/setup#config-web-app">
+</script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyCJw6VNSqSwTO2cJWZL8eDDhaG4fDA7MhM",
+    authDomain: "first-project-ce265.firebaseapp.com",
+    databaseURL: "https://first-project-ce265.firebaseio.com",
+    projectId: "first-project-ce265",
+    storageBucket: "first-project-ce265.appspot.com",
+    messagingSenderId: "270620324656",
+    appId: "1:270620324656:web:46c82e942451941f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+        // Solved Mathematically
+    // Test case 1:
+    // 16 - 00 = 16
+    // 16 % 3 = 1 (Modulus is the remainder)
+    // 3 - 1 = 2 minutes away
+    // 2 + 3:16 = 3:18
+
+    // Solved Mathematically
+    // Test case 2:
+    // 16 - 00 = 16
+    // 16 % 7 = 2 (Modulus is the remainder)
+    // 7 - 2 = 5 minutes away
+    // 5 + 3:16 = 3:21
+
+    database.ref().on("child_added", function(snapshot){
+
+
+    let snap = snapshot.val();
+
+        var tFrequency = 14;
+        var firstTime = "03:15";
+        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+        console.log(firstTimeConverted);
+
+        var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
+
+        var tRemainder = diffTime % tFrequency;
+        console.log(tRemainder);
+
+        var tMinutesTillTrain = tFrequency - tRemainder;
+        console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+        var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+    
+    });
+    </script>
+    <script src="Train.js"></script>
+</body>
+
+</html>

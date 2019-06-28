@@ -16,68 +16,82 @@
 
 <body>
     <header>
-        <div class="jumbotron jumbotron-fluid">
+        <!-- <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1>Anytime is Train Time</h1>
-                <h2>Choo Choo. Chee Chee.</h2>
+                <h2>Choo Choo. Chee Chee.</h2> -->
+                <div class="card" style="width: 100%;">
+                        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="card-img-top" alt="train-image">
+                        <div class="card-body">
+                          <h1 class="card-title">Anytime is Train Time</h1>
+                          <p class="card-text">Choo Choo. Chee Chee.</p>
+                        </div>
+                      </div>
     </header>
-<script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-app.js">
-</script>
-<script src="https://firebase.google.com/docs/web/setup#config-web-app">
-</script>
-<script>
-  var firebaseConfig = {
-    apiKey: "AIzaSyCJw6VNSqSwTO2cJWZL8eDDhaG4fDA7MhM",
-    authDomain: "first-project-ce265.firebaseapp.com",
-    databaseURL: "https://first-project-ce265.firebaseio.com",
-    projectId: "first-project-ce265",
-    storageBucket: "first-project-ce265.appspot.com",
-    messagingSenderId: "270620324656",
-    appId: "1:270620324656:web:46c82e942451941f"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
-<script>
-        // Solved Mathematically
-    // Test case 1:
-    // 16 - 00 = 16
-    // 16 % 3 = 1 (Modulus is the remainder)
-    // 3 - 1 = 2 minutes away
-    // 2 + 3:16 = 3:18
+    <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-app.js">
+    </script>
+    <!-- <script src="https://firebase.google.com/docs/web/setup#config-web-app"> -->
+    </script>
+    <div class="card" style="width: 100%;">
+            <div class="card-header">
+                Current Train Schedule
+            </div>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                    </tr>
+                </thead>
+                <tbody id='foo'>
 
-    // Solved Mathematically
-    // Test case 2:
-    // 16 - 00 = 16
-    // 16 % 7 = 2 (Modulus is the remainder)
-    // 7 - 2 = 5 minutes away
-    // 5 + 3:16 = 3:21
+                </tbody>
+            </table>
+            <hr>
+        </div>
+    <script>
 
-    database.ref().on("child_added", function(snapshot){
+        var firebaseConfig = {
+            apiKey: "AIzaSyCJw6VNSqSwTO2cJWZL8eDDhaG4fDA7MhM",
+            authDomain: "first-project-ce265.firebaseapp.com",
+            databaseURL: "https://first-project-ce265.firebaseio.com",
+            projectId: "first-project-ce265",
+            storageBucket: "first-project-ce265.appspot.com",
+            messagingSenderId: "270620324656",
+            appId: "1:270620324656:web:46c82e942451941f"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
 
+        //var database = firebase.database();
 
-    let snap = snapshot.val();
+        // database.ref().on("child_added", function (snapshot) 
 
-        var tFrequency = 14;
-        var firstTime = "03:15";
-        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-        console.log(firstTimeConverted);
+            //let snap = snapshot.val();
 
-        var currentTime = moment();
-        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        console.log("DIFFERENCE IN TIME: " + diffTime);
+            var tFrequency = 14;
+            var firstTime = "03:15";
+            var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+            console.log(firstTimeConverted);
 
-        var tRemainder = diffTime % tFrequency;
-        console.log(tRemainder);
+            var currentTime = moment();
+            console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+            var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+            console.log("DIFFERENCE IN TIME: " + diffTime);
 
-        var tMinutesTillTrain = tFrequency - tRemainder;
-        console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+            var tRemainder = diffTime % tFrequency;
+            console.log(tRemainder);
 
-        var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-    
-    });
+            var tMinutesTillTrain = tFrequency - tRemainder;
+            console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+            var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+            console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
     </script>
     <script src="Train.js"></script>
 </body>
